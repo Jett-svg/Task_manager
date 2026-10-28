@@ -1,0 +1,48 @@
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .page-header {
+        padding: 1rem;
+    }
+
+    .task-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Для планшетов */
+@media (min-width: 769px) and (max-width: 992px) {
+    .task-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Тёмная тема (сохраняем состояние) */
+body.dark-theme {
+    background-color: #1a1f2e;
+}
+
+/* Анимация для задач */
+.task-item {
+    transition: all 0.3s ease;
+}
+
+.task-item.completed {
+    opacity: 0.7;
+}
+
+/* Приоритеты */
+.priority-high {
+    border-left: 4px solid #e53e3e;
+}
+
+.priority-medium {
+    border-left: 4px solid #dd6b20;
+}
+
+.priority-low {
+    border-left: 4px solid #38a169;
+}

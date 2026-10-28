@@ -1,0 +1,90 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}Статистика - Task Manager{% endblock %}
+{% block page_title %}Статистика{% endblock %}
+
+{% block content %}
+<div class="row row-deck row-cards">
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="subheader">Всего задач</div>
+                </div>
+                <div class="h1 mb-3">{{ total }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="subheader">Активные</div>
+                </div>
+                <div class="h1 mb-3">{{ active }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="subheader">Выполненные</div>
+                </div>
+                <div class="h1 mb-3">{{ completed }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="subheader">Выполнено</div>
+                </div>
+                <div class="h1 mb-3">
+                    {% if total > 0 %}
+                        {% widthratio completed total 100 %}%
+                    {% else %}
+                        0%
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">По приоритету</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="text-center">
+                            <div class="h2 text-danger">{{ by_priority.high }}</div>
+                            <div class="text-muted">Высокий</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-center">
+                            <div class="h2 text-warning">{{ by_priority.medium }}</div>
+                            <div class="text-muted">Средний</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-center">
+                            <div class="h2 text-success">{{ by_priority.low }}</div>
+                            <div class="text-muted">Низкий</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

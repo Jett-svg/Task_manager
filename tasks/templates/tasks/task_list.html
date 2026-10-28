@@ -1,0 +1,59 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}Все задачи - Task Manager{% endblock %}
+{% block page_title %}Все задачи{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <!-- Фильтры -->
+                <div class="btn-group" role="group">
+                    <button type="button"
+                            class="btn btn-sm {% if current_status == 'all' %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                            onclick="filterTasks('all')">
+                        Все
+                    </button>
+                    <button type="button"
+                            class="btn btn-sm {% if current_status == 'active' %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                            onclick="filterTasks('active')">
+                        Активные
+                    </button>
+                    <button type="button"
+                            class="btn btn-sm {% if current_status == 'completed' %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                            onclick="filterTasks('completed')">
+                        Выполненные
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Поиск -->
+                <form method="get" class="d-flex">
+                    <input type="text" name="search" class="form-control me-2"
+                           placeholder="Поиск..." value="{{ search_query }}">
+                    <button type="submit" class="btn btn-primary">🔍</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div id="task-list">
+            {% include 'tasks/partials/task_list.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Сохраняем текущий фильтр
+document.addEventListener('DOMContentLoaded', function() {
+    const currentFilter = '{{ current_status }}';
+    if (currentFilter) {
+        localStorage.setItem('taskFilter', currentFilter);
+    }
+});
+</script>
+{% endblock %}

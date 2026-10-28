@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Task Manager{% endblock %}</title>
+
+    <!-- Tabler CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/tabler/css/tabler.min.css' %}">
+
+    <!-- Наш CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page">
+        <!-- Боковое меню -->
+        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <h1 class="navbar-brand navbar-brand-autodark">
+                    <a href="{% url 'task_list' %}"> Task Manager</a>
+                </h1>
+
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="navbar-nav pt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'task_list' %}">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">📝</span>
+                                <span class="nav-link-title">Все задачи</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'task_create' %}">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">➕</span>
+                                <span class="nav-link-title">Новая задача</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'task_stats' %}">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">📊</span>
+                                <span class="nav-link-title">Статистика</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Основной контент -->
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="page-header d-print-none">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2 class="page-title">{% block page_title %}{% endblock %}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body">
+                <div class="container-fluid">
+                    <div class="row row-deck row-cards">
+                        <div class="col-12">
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabler JS (только один раз, в конце body) -->
+    <script src="{% static 'vendor/tabler/js/tabler.min.js' %}"></script>
+
+    <!-- Наш JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
